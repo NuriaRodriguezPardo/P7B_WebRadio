@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ALTAVEU.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="pr%C3%A1ctica-7-buses-de-comunicaci%C3%B3n-i2s"><strong>PRÁCTICA 7 BUSES DE COMUNICACIÓN I2S</strong></h1>
+<h2 id="reproducci%C3%B3n-desde-memoria-interna"><strong>Reproducción desde memoria interna</strong></h2>
+<p>Para esta parte de la práctica tuvimos que añadir la librería ESP8266Audio para facilitar tanto la generación del sonido como la comunicación I2S mediante los buses MISO, MOSI, CS, CLK.</p>
+<p>Vamos a empezar explicando el código necesario para reproducir un sonido creado por el mismo creador de la librería.</p>
+<pre class="hljs"><code><div><span class="hljs-meta">#include "Arduino.h" </span>
+
+<span class="hljs-meta">#include "FS.h"</span>
+<span class="hljs-meta">#include "HTTPClient.h"</span>
+<span class="hljs-meta">#include "SPIFFS.h"</span>
+<span class="hljs-meta">#include "SD.h"</span>
+<span class="hljs-meta">#include "AudioGeneratorAAC.h"</span>
+<span class="hljs-meta">#include "AudioOutputI2S.h"</span>
+<span class="hljs-meta">#include "AudioFileSourcePROGMEM.h"</span>
+<span class="hljs-meta">#include "sampleaac.h"</span>
+
+AudioFileSourcePROGMEM *<span class="hljs-keyword">in</span>;
+AudioGeneratorAAC *aac;
+AudioOutputI2S *<span class="hljs-keyword">out</span>;
+</div></code></pre>
+<p>Para poder llevar acabo la práctica tenemos que añadir unas librerías las cuáles dependen de otra o de lo contrario nos saldrá error a la hora de compilar.
+Las librerías <em>AudioGeneratorAAC.h,AudioOutput.h,sampleaac.h,AudioFileSourcePROGMEM.h</em> forman parte de la librería anteriormente mencionada ESP8266Audio. Todas las otras las podemos encontrar en el Framework de Arduino.</p>
+<p>Una vez incluidas las librerías declaramos diversos punteros con los cuáles luego vamos a necesitar.</p>
+<h2 id="empezemos-con-el-voidsetup"><strong>Empezemos con el void_setup()</strong></h2>
+<pre class="hljs"><code><div>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setup</span>(<span class="hljs-params"></span>)</span>{
+  Serial.begin(<span class="hljs-number">9600</span>);
+
+  <span class="hljs-keyword">in</span> = <span class="hljs-keyword">new</span> AudioFileSourcePROGMEM(sampleaac, <span class="hljs-keyword">sizeof</span>(sampleaac));
+  aac = <span class="hljs-keyword">new</span> AudioGeneratorAAC();
+  <span class="hljs-keyword">out</span> = <span class="hljs-keyword">new</span> AudioOutputI2S();
+  <span class="hljs-keyword">out</span> -&gt; SetGain(<span class="hljs-number">0.125</span>);
+  <span class="hljs-keyword">out</span> -&gt; SetPinout(<span class="hljs-number">26</span>,<span class="hljs-number">25</span>,<span class="hljs-number">22</span>);
+  aac-&gt;begin(<span class="hljs-keyword">in</span>, <span class="hljs-keyword">out</span>);
+}
+</div></code></pre>
+<p>Primero inicializamos la comunicación serie.
+Declaramos el puntero *<em>in</em> como una variable que llevará nuestro fichero de audio guardado en el fichero <em>sampleaac.h</em>.
+El puntero *<em>aac</em> será el encargado de empezar la comunicación entre el decodificador y nuestra placa.
+Finalmente *<em>out</em> nos servirá para las configuraciones como la ganancia, los pines de salida de la ESP32, forzar una salida mono...
+Podemos profundizar en ellas yendo a las declaraciones de cada clase.</p>
+<h3 id="audiofilesourceprogmem"><strong>AudioFileSourcePROGMEM</strong></h3>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">class</span> <span class="hljs-title">AudioFileSourcePROGMEM</span> : <span class="hljs-title">public</span> <span class="hljs-title">AudioFileSource</span>
+{
+  <span class="hljs-keyword">public</span>:
+    AudioFileSourcePROGMEM();
+    AudioFileSourcePROGMEM(<span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *data, uint32_t len);
+    <span class="hljs-keyword">virtual</span> ~AudioFileSourcePROGMEM() <span class="hljs-keyword">override</span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> uint32_t <span class="hljs-title">read</span>(<span class="hljs-params"><span class="hljs-keyword">void</span> *data, uint32_t len</span>) <span class="hljs-keyword">override</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">seek</span>(<span class="hljs-params">int32_t pos, <span class="hljs-keyword">int</span> dir</span>) <span class="hljs-keyword">override</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">close</span>(<span class="hljs-params"></span>) <span class="hljs-keyword">override</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">isOpen</span>(<span class="hljs-params"></span>) <span class="hljs-keyword">override</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> uint32_t <span class="hljs-title">getSize</span>(<span class="hljs-params"></span>) <span class="hljs-keyword">override</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> uint32_t <span class="hljs-title">getPos</span>(<span class="hljs-params"></span>) <span class="hljs-keyword">override</span></span> { <span class="hljs-keyword">if</span> (!opened) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> filePointer; };
+
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">open</span>(<span class="hljs-params"><span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *data, uint32_t len</span>)</span>;
+
+  <span class="hljs-keyword">private</span>:
+    <span class="hljs-keyword">bool</span> opened;
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *progmemData;
+    uint32_t progmemLen;
+    uint32_t filePointer;
+};
+</div></code></pre>
+<p>Así por encima vemos que es una clase que no tiene mucha complejidad.
+La función <em>AudioFileSourcePROGMEM()</em> de lo que se encarga esta es guardar en un puntero cierta información (lo que se le envía por el primer parámetro) y en el segundo parámetro tiene la longitud de ese puntero.
+Si vamos a la descripción de esta función encontramos:</p>
+<pre class="hljs"><code><div>AudioFileSourcePROGMEM::AudioFileSourcePROGMEM(<span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span> *data, uint32_t len)
+{
+  open(data, len);
+}
+</div></code></pre>
+<p>Donde la función open hace una tarea muy básica, si alguno de los dos parámetros que le hemos pasado está vacío nos retorna <em>false</em>. Si no están vacíos, le da un valor a alguna variable de la clase.</p>
+<p>Todo lo demás son funciones que a priori no necesitamos para lo que queremos hacer.</p>
+<h3 id="audio-generator-aac"><strong>Audio Generator AAC</strong></h3>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">class</span> <span class="hljs-title">AudioGeneratorAAC</span> : <span class="hljs-title">public</span> <span class="hljs-title">AudioGenerator</span>
+{
+  <span class="hljs-keyword">public</span>:
+    AudioGeneratorAAC();
+    AudioGeneratorAAC(<span class="hljs-keyword">void</span> *preallocateData, <span class="hljs-keyword">int</span> preallocateSize);
+    <span class="hljs-keyword">virtual</span> ~AudioGeneratorAAC() <span class="hljs-keyword">override</span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">begin</span>(<span class="hljs-params">AudioFileSource *source, AudioOutput *output</span>) <span class="hljs-keyword">override</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">loop</span>(<span class="hljs-params"></span>) <span class="hljs-keyword">override</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">stop</span>(<span class="hljs-params"></span>) <span class="hljs-keyword">override</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">isRunning</span>(<span class="hljs-params"></span>) <span class="hljs-keyword">override</span></span>;
+
+  <span class="hljs-keyword">protected</span>:
+    <span class="hljs-keyword">void</span> *preallocateSpace;
+    <span class="hljs-keyword">int</span> preallocateSize;
+
+    <span class="hljs-comment">// Helix AAC decoder</span>
+    HAACDecoder hAACDecoder;
+
+    <span class="hljs-comment">// Input buffering</span>
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> buffLen = <span class="hljs-number">1600</span>;
+    uint8_t *buff; <span class="hljs-comment">//[1600]; // File buffer required to store at least a whole compressed frame</span>
+    int16_t buffValid;
+    int16_t lastFrameEnd;
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">FillBufferWithValidFrame</span>(<span class="hljs-params"></span>)</span>; <span class="hljs-comment">// Read until we get a valid syncword and min(feof, 2048) butes in the buffer</span>
+
+    <span class="hljs-comment">// Output buffering</span>
+    int16_t *outSample; <span class="hljs-comment">//[1024 * 2]; // Interleaved L/R</span>
+    int16_t validSamples;
+    int16_t curSample;
+
+    <span class="hljs-comment">// Each frame may change this if they're very strange, I guess</span>
+    unsigned <span class="hljs-keyword">int</span> lastRate;
+    <span class="hljs-keyword">int</span> lastChannels;
+
+};
+
+
+</div></code></pre>
+<p>Esta clase tiene parámetros que cabe explicarlos un poco por encima para entender el funcionamiento de esta.</p>
+<p>La primero que nosotros hemos usado es el constructor que nos establece las variable como <em>default</em>.</p>
+<p>En esta clase vamos a guardar parámetros importantes como el tamaño del buffer de entrada y de salida, la posición por la que vamos, el rate... En definitiva aunque suene muy complejo todo esto, son parámetros que necesitamos para poder enviar los datos por el bus I2S.</p>
+<p>También usamos las funciones begin que es la que realmente una vez configurados todos los parámetros y nombradas todas las variables, es la que nos permite empezar a usar esta comunicación. Hace alguna comprovación si lo que le llega no está vacío y luego con el puntero <em>this</em> apunta al parámetro output enviado y este a una función <em>begin()</em> definida en la clase <em>AudioOutput</em>.
+Luego establece el número de bits por muestra, en este caso 16, ya que usamos 16 bits para esta placa y establece la variable <em>running=true</em>.</p>
+<h3 id="audiooutputi2s"><strong>AudioOutputI2S</strong></h3>
+<p>Esta básicamente nos sirve para elegir los puertos de salida y alguna configuración como la ganancia.</p>
+<pre class="hljs"><code><div>AudioOutputI2S::AudioOutputI2S(<span class="hljs-keyword">int</span> port, <span class="hljs-keyword">int</span> output_mode, <span class="hljs-keyword">int</span> dma_buf_count, <span class="hljs-keyword">int</span> use_apll)
+{
+  <span class="hljs-keyword">this</span>-&gt;portNo = port;
+  <span class="hljs-keyword">this</span>-&gt;i2sOn = <span class="hljs-literal">false</span>;
+  <span class="hljs-keyword">this</span>-&gt;dma_buf_count = dma_buf_count;
+  <span class="hljs-keyword">if</span> (output_mode != EXTERNAL_I2S &amp;&amp; output_mode != INTERNAL_DAC &amp;&amp; output_mode != INTERNAL_PDM) {
+    output_mode = EXTERNAL_I2S;
+  }
+
+</div></code></pre>
+<h2 id="finalmente-voidloop"><strong>Finalmente void_loop()...</strong></h2>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">loop</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">if</span> (aac-&gt;isRunning()) {
+    Serial.printf(<span class="hljs-string">"Sound Generator\n"</span>);
+    aac-&gt;loop();
+  } <span class="hljs-keyword">else</span> {
+    aac -&gt; stop();
+    delay(<span class="hljs-number">1000</span>);
+  }
+}
+</div></code></pre>
+<p>Es muy simple el funcionamiento del void loop, simplemente usando tres funciones de la clase <em>Audio Generator AAC</em> conseguiremos reproducir el sonido que queramos.
+Lo primero que hace es mirar si la variable Running está en true porque es la manera de que el programa sabe que no hay ningún error y le hemos pasado el fichero de audio correctamente como antes he mencionado.
+Una vez se le devuelve <em>true</em> llama a la función loop().</p>
+<h3 id="bool-audiogeneratoraacloop"><strong>bool AudioGeneratorAAC::loop()</strong></h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">bool</span> AudioGeneratorAAC::loop()
+{
+  <span class="hljs-keyword">if</span> (!running) <span class="hljs-keyword">goto</span> done; <span class="hljs-comment">// Nothing to do here!</span>
+
+  <span class="hljs-comment">// If we've got data, try and pump it out...</span>
+  <span class="hljs-keyword">while</span> (validSamples) {
+    <span class="hljs-keyword">if</span> (lastChannels == <span class="hljs-number">1</span>) {
+       lastSample[<span class="hljs-number">0</span>] = outSample[curSample];
+       lastSample[<span class="hljs-number">1</span>] = outSample[curSample];
+    } <span class="hljs-keyword">else</span> {
+      lastSample[<span class="hljs-number">0</span>] = outSample[curSample*<span class="hljs-number">2</span>];
+      lastSample[<span class="hljs-number">1</span>] = outSample[curSample*<span class="hljs-number">2</span> + <span class="hljs-number">1</span>];
+    }
+    <span class="hljs-keyword">if</span> (!output-&gt;ConsumeSample(lastSample)) <span class="hljs-keyword">goto</span> done; <span class="hljs-comment">// Can't send, but no error detected</span>
+    validSamples--;
+    curSample++;
+  }
+</div></code></pre>
+<p>Solamente recorre todas las muestras mediante el bucle while() y va variando el valor de la muestra de salida.</p>
+<p>Finalmente si la variable running retorna <em>false</em> simplemente llamará la función stop() y esta cerrará el fichero.</p>
+<h1 id="conclusiones"><strong>CONCLUSIONES</strong></h1>
+<p>Para la realización de esta práctica tuve algún problema con los include sobretodo ya que al compilar me decía que faltaban muchas librerías para incluir y hasta que finalmente entendí el porque me las pedía estuve un buen rato, me di cuenta que esas librerías hacían falta porque eran dependencias de la otra que había añadido.</p>
+<p>También tuve que cambiar algún parámetro de la librería ya que por defecto usaba unos pines de salida que no eran los que a mi me interesaban, cabe decir que fue una buena práctica para entender el uso de librerías.</p>
+<p>Otro problema que me encontré fue el del altavoz, ya que a priori no disponía de niguno por casa por lo que sabía que el programa funcionaba pero podía escuchar el sonido. Finalmente saqué un tweeter de una torre de altavoz que tenía en casa. Con lo que me queda una pregunta para solucionar, soldé el positivo y negativo del altavoz con un cable y lo conecté al decodificador pero me encontré que había muchísimo ruidp, tanto que no podía apenas escuchar el sonido que me interesaba, la pregunta a solucionar es:
+Fue por el altavoz, por el cableado o el amplificador estaba defectuoso.</p>
+<p><img src="34A4E4EB-5F38-4ED9-952A-335C89453707.jpeg" alt="DIAGRAMA DE TIEMPOS"></p>
+
+</body>
+</html>
